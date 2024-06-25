@@ -24,7 +24,7 @@
               <input type="number" class="full-size-input" [(ngModel)]="income.values[j]" (ngModelChange)="updateTotals()" />
             </td>
             <td>{{ getRowTotal(income.values) }}</td>
-            <td>
+            <td >
               <button (click)="deleteIncomeCategory(i)" class="danger-button">Delete</button>
             </td>
           </tr>
@@ -42,11 +42,11 @@
         </tr>
         <ng-container *ngFor="let expense of expenseCategories; let i = index">
           <tr>
-            <td>
-              <input [(ngModel)]="expense.name" placeholder="Category" />
+            <td class="full-size-td">
+              <input [(ngModel)]="expense.name" class="full-size-input" placeholder="Category" />
             </td>
-            <td *ngFor="let month of months; let j = index">
-              <input type="number" [(ngModel)]="expense.values[j]" (ngModelChange)="updateTotals()" />
+            <td *ngFor="let month of months; let j = index" class="full-size-td">
+              <input type="number" class="full-size-input" [(ngModel)]="expense.values[j]" (ngModelChange)="updateTotals()" />
             </td>
             <td>{{ getRowTotal(expense.values) }}</td>
             <td>
