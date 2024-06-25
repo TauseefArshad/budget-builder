@@ -1,0 +1,82 @@
+<div>
+    <h2>Budget Builder Example</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th *ngFor="let month of months">{{ month }}</th>
+          <th>Total</th>
+          <th>
+            <button (click)="addMonth()">Add Month</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td [attr.colspan]="months.length + 2">Income</td>
+        </tr>
+        <ng-container *ngFor="let income of incomeCategories; let i = index">
+          <tr>
+            <td class="full-size-td">
+              <input [(ngModel)]="income.name" class="full-size-input" placeholder="Category" />
+            </td>
+            <td *ngFor="let month of months; let j = index" class="full-size-td">
+              <input type="number" class="full-size-input" [(ngModel)]="income.values[j]" (ngModelChange)="updateTotals()" />
+            </td>
+            <td>{{ getRowTotal(income.values) }}</td>
+            <td>
+              <button (click)="deleteIncomeCategory(i)" class="danger-button">Delete</button>
+            </td>
+          </tr>
+        </ng-container>
+        <tr>
+          <td><button (click)="addIncomeCategory()">Add new 'Income' category</button></td>
+        </tr>
+        <tr>
+          <td>Income Total</td>
+          <td *ngFor="let month of months">{{ incomeTotals[month] }}</td>
+          <td>{{ getIncomeTotalSum() }}</td>
+        </tr>
+        <tr>
+          <td [attr.colspan]="months.length + 2">Expenses</td>
+        </tr>
+        <ng-container *ngFor="let expense of expenseCategories; let i = index">
+          <tr>
+            <td>
+              <input [(ngModel)]="expense.name" placeholder="Category" />
+            </td>
+            <td *ngFor="let month of months; let j = index">
+              <input type="number" [(ngModel)]="expense.values[j]" (ngModelChange)="updateTotals()" />
+            </td>
+            <td>{{ getRowTotal(expense.values) }}</td>
+            <td>
+              <button (click)="deleteExpenseCategory(i)" class="danger-button">Delete</button>
+            </td>
+          </tr>
+        </ng-container>
+        <tr>
+          <td><button (click)="addExpenseCategory()">Add new 'Expenses' category</button></td>
+        </tr>
+        <tr>
+          <td>Total Expenses</td>
+          <td *ngFor="let month of months">{{ expenseTotals[month] }}</td>
+          <td>{{ getExpenseTotalSum() }}</td>
+        </tr>
+        <tr>
+          <td>Profit / Loss</td>
+          <td *ngFor="let month of months">{{ profitLoss[month] }}</td>
+          <td>{{ getProfitLossSum() }}</td>
+        </tr>
+        <tr>
+          <td>Opening Balance</td>
+          <!-- <td>0</td> -->
+          <td *ngFor="let i of months; let j = index">{{ profitLoss[months[j]] }}</td>
+        </tr>
+        <tr>
+          <td>Closing Balance</td>
+          <td *ngFor="let i of months">{{ closingBalance[i] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
